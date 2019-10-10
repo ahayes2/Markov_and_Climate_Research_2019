@@ -19,7 +19,8 @@ print(max)
 print(min)
 print(percentChange)
 
-tStates <- cut(percentChange, breaks = c(-2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3),
+binList <- c(-2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3)
+tStates <- cut(percentChange, breaks = binList,
                labels = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
 print(tStates)
 
@@ -30,3 +31,72 @@ weatherFittedMLE
 simulatedWeather <- rmarkovchain(n = 80, object = weatherFittedMLE$estimate, t0 = 2)
 
 print(simulatedWeather)
+plot(simulatedWeather, type="l")
+
+len <- length(simulatedWeather)
+i = 1
+
+estimatedChange <- vector()
+add
+
+while (i < len)
+{
+  if (simulatedWeather[i] == "1")
+  {
+    add <- (((-2.5 + -2)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+  if (simulatedWeather[i] == "2")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add) 
+  }
+  if (simulatedWeather[i] == "3")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add) 
+  }
+  if (simulatedWeather[i] == "4")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+  if (simulatedWeather[i] == "5")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add) 
+  }
+  if (simulatedWeather[i] == "6")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add) 
+  }
+  if (simulatedWeather[i] == "7")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+  if (simulatedWeather[i] == "8")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+  if (simulatedWeather[i] == "9")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+  if (simulatedWeather[i] == "10")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+  if (simulatedWeather[i] == "11")
+  {
+    add <- (((2 - 2.5)/2) + 14.178)
+    append(estimatedChange, add)
+  }
+}
+
+#print(estimatedChange)
+
