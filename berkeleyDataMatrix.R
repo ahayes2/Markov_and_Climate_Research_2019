@@ -19,39 +19,57 @@ tStates <- cut(percentChange, breaks = binList,
 library(markovchain)
 weatherFittedMLE <- markovchainFit(data = tStates)
 weatherFittedMLE
-simStates <- rmarkovchain(n = 80, object = weatherFittedMLE$estimate, t0 = 2)
 
-lenSimStates <- length(simStates) 
-i = 1
-k = 1
-
-simPercentChange <- vector()
-
-while(i <= lenSimStates)
+yearsPredictedTemp <- vector()
+for(i in 1:1)
 {
-  for(k in 1:(length(binList) - 1))
+  simStates <- rmarkovchain(n = 80, object = weatherFittedMLE$estimate, t0 = 2)
+  
+  lenSimStates <- length(simStates) 
+  i = 1
+  k = 1
+  
+  simPercentChange <- vector()
+  
+  while(i <= lenSimStates)
   {
-    if(simStates[i] == k)
+    for(k in 1:(length(binList) - 1))
     {
-      simPercentChange[i] = ((((binList[k] + binList[k+1])/2))/100)+1
+      if(simStates[i] == k)
+      {
+        simPercentChange[i] = ((((binList[k] + binList[k+1])/2))/100)+1
+      }
     }
+    i <- i + 1
   }
-  i <- i + 1
+  
+  curAvgT = 14.178 + 0.77
+  
+  cumPerChange = cumprod(simPercentChange)
+  #print(cumPerChange)
+  predictedTemp <- vector()
+  
+  predictedTemp[1]=curAvgT
+  for(i in 1: lenSimStates)
+    predictedTemp[i + 1] = curAvgT * (cumPerChange[i])
+  
+  yearsPredictedTemp <- append(yearsPredictedTemp, predictedTemp)
 }
 
-curAvgT = 14.178 + 0.77
+print(yearsPredictedTemp)
 
-cumPerChange = prod(simPercentChange)
-print(cumPerChange)
-temp <- vector()
+tempMatrix <- matrix (yearsPredictedTemp, nrow = 80, byrow = F)
 
-for(i in 0: lenSimStates - 1)
-  temp[i+1] = curAvgT * (simPercentChange[i+1])^1
+print(tempMatrix)
+
+#print(simPercentChange)
+#print(predictedTemp)
+ 
+
+plotTemp <- plot(dataList, type = "l", ylim = c(11, 19), xlim = c(0, 250))
+#lines(predictedTemp, xlim = c(169, 250), type = "l", col = "red")
+points(x = 169: 249, y = predictedTemp, type = "l", col = "red")
+pr
 
 
-print(simPercentChange)
-print(temp)
-
-plot(dataList, type = "l")
-lines(temp, type = "l", col = "red")
-
+#source command 
